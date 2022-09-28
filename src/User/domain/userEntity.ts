@@ -7,6 +7,6 @@ export interface IUser {
     email:string;
     password:string;
     photo : null|string;
-    roleId : Types.ObjectId | null;
+    role? : Types.ObjectId | null;
     is_deleted : boolean
 }

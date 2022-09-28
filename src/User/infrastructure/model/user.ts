@@ -28,7 +28,7 @@ const Userchema = new Schema <IUser> ({
         type:String,
         required : false
      },
-     roleId : {
+     role: {
          type : Schema.Types.ObjectId,
          ref : 'Role'
      },
@@ -43,4 +43,4 @@ const Userchema = new Schema <IUser> ({
 });
 
 
-export default model('User',Userchema);
+export default model <IUser>('User',Userchema);

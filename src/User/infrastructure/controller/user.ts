@@ -10,7 +10,10 @@ export class UserController {
 
      public getAllUser = async(req:Request,res:Response):Promise<IUser[]|Response> => {
         try{
+            console.log('hello');
            const users = await this.userCase.getAllUser();
+            
+           console.log(users);
            return res.status(200).json(users);
         }catch(error){
             return res.status(500).json(error);
@@ -58,15 +61,16 @@ export class UserController {
     }
 
     public loginUser = async(req:Request,res:Response):Promise<any> => {
+         console.log('Hello');
         try{
               const saveUser = await this.userCase.getUserByEmail(req.body.email);
               if(!saveUser) return res.status(404).json({messsage : "User not found"});
               const comparePassword :boolean = await passwordCompare(req.body.password,saveUser.password);
-              if(comparePassword) {
+              if(!comparePassword) return res.status(401).json({message : "Passwords not match"});
                 const payload:any = {id : saveUser.id} 
                 const token = await generateSignature(payload);
                 return res.status(201).json({message : 'Login with Successful',token});
-              }
+              
         }catch(error){
             return res.status(500).json(error);
         }

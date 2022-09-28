@@ -14,10 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MongoRepository = void 0;
 const user_1 = __importDefault(require("../model/user"));
+const role_1 = __importDefault(require("../../../Role/infrastructure/model/role"));
 class MongoRepository {
     getAllUser() {
         return __awaiter(this, void 0, void 0, function* () {
-            const users = yield user_1.default.find().where({ is_deleted: false });
+            const users = yield user_1.default.find().populate('roles').orFail();
+            console.log(users);
             return users;
         });
     }
@@ -28,9 +30,14 @@ class MongoRepository {
         });
     }
     registerUser(user) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const newUser = new user_1.default(user);
+            const role = yield role_1.default.findById(newUser.role);
+            newUser.role = role === null || role === void 0 ? void 0 : role._id;
             yield newUser.save();
+            (_a = role === null || role === void 0 ? void 0 : role.users) === null || _a === void 0 ? void 0 : _a.push(newUser._id);
+            yield (role === null || role === void 0 ? void 0 : role.save());
             return newUser;
         });
     }

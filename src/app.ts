@@ -2,12 +2,18 @@ import express ,{Application} from 'express';
 import dotenv from 'dotenv';
 import db from './database/conection';
 import userRouter from './User/infrastructure/Router/user';
+import roleRouter from './Role/infrastructure/Router/role';
+import categoryRouter from './Category/infrastructure/Router/category';
+import newsRouter from './News/infrastructure/Router/news';
 
 class Server {
     private app:Application;
     private port : number;
     private api  = {
-         user : '/api/user'
+         user : '/api/user',
+         role : '/api/role',
+         category : '/api/category',
+         news : '/api/news'
     }
 
     constructor(){
@@ -32,6 +38,9 @@ class Server {
     }
     public Routes() {
          this.app.use(this.api.user,userRouter);
+         this.app.use(this.api.role,roleRouter);
+         this.app.use(this.api.category,categoryRouter);
+         this.app.use(this.api.news,newsRouter);
     }
 }
 

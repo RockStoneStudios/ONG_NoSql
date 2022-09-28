@@ -18,8 +18,8 @@ class UserUseCase {
             const users = yield this.useCase.getAllUser();
             return users;
         });
-        this.registerUser = ({ id, firstName, lastName, age, email, password, photo, roleId, is_deleted }) => __awaiter(this, void 0, void 0, function* () {
-            const newUserValue = new userValue_1.UserValue({ id, firstName, lastName, age, email, password, photo, roleId, is_deleted });
+        this.registerUser = ({ firstName, lastName, age, email, password, photo, role, is_deleted }) => __awaiter(this, void 0, void 0, function* () {
+            const newUserValue = new userValue_1.UserValue({ firstName, lastName, age, email, password, photo, role, is_deleted });
             const newUser = yield this.useCase.registerUser(newUserValue);
             return newUser;
         });
@@ -27,8 +27,8 @@ class UserUseCase {
             const user = yield this.useCase.getUserById(id);
             return user;
         });
-        this.updatedUser = (idUser, { id, firstName, lastName, age, email, password, photo, roleId, is_deleted }) => __awaiter(this, void 0, void 0, function* () {
-            const newUserValue = new userValue_1.UserValue({ id, firstName, lastName, age, email, password, photo, roleId, is_deleted });
+        this.updatedUser = (idUser, { firstName, lastName, age, email, password, photo, role, is_deleted }) => __awaiter(this, void 0, void 0, function* () {
+            const newUserValue = new userValue_1.UserValue({ firstName, lastName, age, email, password, photo, role, is_deleted });
             const updatedUser = yield this.useCase.updatedUser(idUser, newUserValue);
             return updatedUser;
         });

@@ -1,12 +1,17 @@
 import { IUserRepository } from "../../domain/IUserRepository";
 import User from "../model/user";
+import Role from '../../../Role/infrastructure/model/role';
 import { IUser } from "../../domain/userEntity";
+import { IRole } from "../../../Role/domain/roleEntity";
 
 
 
 export class MongoRepository implements IUserRepository{
+
     async getAllUser(): Promise<IUser[] | null> {
-        const users = await User.find().where({is_deleted : false});
+        const users = await User.find().populate<{rol : IRole}>('roles').orFail();
+        console.log(users);
+        
         return users;
     }
     async getUserById(id: string): Promise<IUser | null> {
@@ -16,7 +21,11 @@ export class MongoRepository implements IUserRepository{
 
     async registerUser(user: IUser): Promise<IUser | null> {
         const newUser = new User(user);
+        const role = await Role.findById(newUser.role);
+        newUser.role = role?._id;
         await newUser.save();
+        role?.users?.push(newUser._id);
+        await role?.save();
         return newUser;
     }
     async updatedUser(id: string, user: IUser): Promise<IUser | null> {

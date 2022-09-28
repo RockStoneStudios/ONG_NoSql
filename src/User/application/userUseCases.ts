@@ -9,10 +9,10 @@ export class UserUseCase {
         const users = await this.useCase.getAllUser();
         return users;
     }
-    public registerUser = async({id,firstName,lastName,age,email,password,photo,roleId,is_deleted}:
-        {id:string,firstName:string,lastName:string,age:number,email:string,password:string,photo:string,roleId:Types.ObjectId|null,is_deleted:boolean})=>
+    public registerUser = async({firstName,lastName,age,email,password,photo,role,is_deleted}:
+        {firstName:string,lastName:string,age:number,email:string,password:string,photo:string,role:Types.ObjectId|null,is_deleted:boolean})=>
     {
-            const newUserValue = new UserValue({id,firstName,lastName,age,email,password,photo,roleId,is_deleted});
+            const newUserValue = new UserValue({firstName,lastName,age,email,password,photo,role,is_deleted});
             const  newUser = await this.useCase.registerUser(newUserValue);
             return newUser; 
      }
@@ -21,9 +21,9 @@ export class UserUseCase {
          return user;
      }
 
-     public updatedUser = async (idUser:string,{id,firstName,lastName,age,email,password,photo,roleId,is_deleted}:
-        {id:string,firstName:string,lastName:string,age:number,email:string,password:string,photo:string,roleId:Types.ObjectId|null,is_deleted:boolean})=>{
-          const newUserValue = new UserValue({id,firstName,lastName,age,email,password,photo,roleId,is_deleted});
+     public updatedUser = async (idUser:string,{firstName,lastName,age,email,password,photo,role,is_deleted}:
+        {id:string,firstName:string,lastName:string,age:number,email:string,password:string,photo:string,role:Types.ObjectId|null,is_deleted:boolean})=>{
+          const newUserValue = new UserValue({firstName,lastName,age,email,password,photo,role,is_deleted});
            const updatedUser = await this.useCase.updatedUser(idUser,newUserValue);
            return updatedUser;   
         }

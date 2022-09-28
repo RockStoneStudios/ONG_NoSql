@@ -18,7 +18,9 @@ class UserController {
         this.userCase = userCase;
         this.getAllUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
+                console.log('hello');
                 const users = yield this.userCase.getAllUser();
+                console.log(users);
                 return res.status(200).json(users);
             }
             catch (error) {
@@ -68,16 +70,17 @@ class UserController {
             }
         });
         this.loginUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log('Hello');
             try {
                 const saveUser = yield this.userCase.getUserByEmail(req.body.email);
                 if (!saveUser)
                     return res.status(404).json({ messsage: "User not found" });
                 const comparePassword = yield (0, ComparePassword_1.passwordCompare)(req.body.password, saveUser.password);
-                if (comparePassword) {
-                    const payload = { id: saveUser.id };
-                    const token = yield (0, signature_1.generateSignature)(payload);
-                    return res.status(201).json({ message: 'Login with Successful', token });
-                }
+                if (!comparePassword)
+                    return res.status(401).json({ message: "Passwords not match" });
+                const payload = { id: saveUser.id };
+                const token = yield (0, signature_1.generateSignature)(payload);
+                return res.status(201).json({ message: 'Login with Successful', token });
             }
             catch (error) {
                 return res.status(500).json(error);
