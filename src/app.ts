@@ -5,6 +5,8 @@ import userRouter from './User/infrastructure/Router/user';
 import roleRouter from './Role/infrastructure/Router/role';
 import categoryRouter from './Category/infrastructure/Router/category';
 import newsRouter from './News/infrastructure/Router/news';
+import memberRouter from './Member/infrastructure/Router/member';
+import organizationRouter from './Organization/infrastructure/Router/organization';
 
 class Server {
     private app:Application;
@@ -13,7 +15,9 @@ class Server {
          user : '/api/user',
          role : '/api/role',
          category : '/api/category',
-         news : '/api/news'
+         news : '/api/news',
+         memeber : '/api/member',
+         organization : '/api/organization'
     }
 
     constructor(){
@@ -41,6 +45,8 @@ class Server {
          this.app.use(this.api.role,roleRouter);
          this.app.use(this.api.category,categoryRouter);
          this.app.use(this.api.news,newsRouter);
+         this.app.use(this.api.memeber,memberRouter);
+         this.app.use(this.api.organization,organizationRouter);
     }
 }
 

@@ -10,13 +10,17 @@ const user_1 = __importDefault(require("./User/infrastructure/Router/user"));
 const role_1 = __importDefault(require("./Role/infrastructure/Router/role"));
 const category_1 = __importDefault(require("./Category/infrastructure/Router/category"));
 const news_1 = __importDefault(require("./News/infrastructure/Router/news"));
+const member_1 = __importDefault(require("./Member/infrastructure/Router/member"));
+const organization_1 = __importDefault(require("./Organization/infrastructure/Router/organization"));
 class Server {
     constructor() {
         this.api = {
             user: '/api/user',
             role: '/api/role',
             category: '/api/category',
-            news: '/api/news'
+            news: '/api/news',
+            memeber: '/api/member',
+            organization: '/api/organization'
         };
         dotenv_1.default.config();
         this.app = (0, express_1.default)();
@@ -40,6 +44,8 @@ class Server {
         this.app.use(this.api.role, role_1.default);
         this.app.use(this.api.category, category_1.default);
         this.app.use(this.api.news, news_1.default);
+        this.app.use(this.api.memeber, member_1.default);
+        this.app.use(this.api.organization, organization_1.default);
     }
 }
 new Server();
