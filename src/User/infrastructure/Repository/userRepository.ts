@@ -8,10 +8,9 @@ import { IRole } from "../../../Role/domain/roleEntity";
 
 export class MongoRepository implements IUserRepository{
 
-    async getAllUser(): Promise<IUser[] | null> {
-        const users = await User.find().populate<{rol : IRole}>('roles').orFail();
+    async getAllUser(): Promise<IUser[]|null> {
+        const users = await User.find({}).populate({path : 'role'})
         console.log(users);
-        
         return users;
     }
     async getUserById(id: string): Promise<IUser | null> {

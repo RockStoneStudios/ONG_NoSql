@@ -4,10 +4,11 @@ import { IRoleRepository } from '../../domain/IRoleRepository';
 import { IUser } from '../../../User/domain/userEntity';
 
 
+
 export class MongoRepository implements IRoleRepository {
 
-    async getAllRole(): Promise<IRole[] | null> {
-        const roles = await Role.find().populate<{user: IUser}>('users').orFail();
+    async getAllRole(): Promise<IRole[]|null> {
+        const roles = await Role.find({}).populate({path : 'users'});
         console.log(roles);
         
         return roles;

@@ -1,4 +1,4 @@
-import {model,Schema} from 'mongoose';
+import {model,Schema,Types} from 'mongoose';
 import { IRole } from '../../domain/roleEntity';
 
 const RoleSchema = new Schema<IRole> ({
@@ -11,7 +11,7 @@ const RoleSchema = new Schema<IRole> ({
         required : true
      },
      users :[{
-        type : Schema.Types.ObjectId,
+        type : Types.ObjectId,
         ref : 'User'
      }],
     },{
@@ -20,4 +20,4 @@ const RoleSchema = new Schema<IRole> ({
     
 });
 
-export default model <IRole>('Role',RoleSchema);
+export default model <IRole>('Rol',RoleSchema);

@@ -11,12 +11,12 @@ const RoleSchema = new mongoose_1.Schema({
         required: true
     },
     users: [{
-            type: mongoose_1.Schema.Types.ObjectId,
+            type: mongoose_1.Types.ObjectId,
             ref: 'User'
         }],
 }, {
     timestamps: false,
     versionKey: false
 });
-exports.default = (0, mongoose_1.model)('Role', RoleSchema);
+exports.default = (0, mongoose_1.model)('Rol', RoleSchema);
 //# sourceMappingURL=role.js.map

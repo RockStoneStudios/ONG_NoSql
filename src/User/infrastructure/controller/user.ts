@@ -10,7 +10,7 @@ export class UserController {
 
      public getAllUser = async(req:Request,res:Response):Promise<IUser[]|Response> => {
         try{
-            console.log('hello');
+            
            const users = await this.userCase.getAllUser();
             
            console.log(users);

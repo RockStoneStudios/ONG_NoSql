@@ -29,8 +29,8 @@ const Userchema = new mongoose_1.Schema({
         required: false
     },
     role: {
-        type: mongoose_1.Schema.Types.ObjectId,
-        ref: 'Role'
+        type: mongoose_1.Types.ObjectId,
+        ref: 'Rol'
     },
     is_deleted: {
         type: Boolean,

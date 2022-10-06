@@ -6,7 +6,7 @@ import { IRole } from "../../domain/roleEntity";
 export class RoleController {
     constructor(private roleCase:RoleUseCase){}
 
-    public getAllRoles = async (req:Request,res:Response) : Promise<IRole|Response> => {
+    public getAllRoles = async (req:Request,res:Response) : Promise<IRole[]|Response> => {
          try {
              const roles = await this.roleCase.getAllRole();
              return res.status(200).json(roles);

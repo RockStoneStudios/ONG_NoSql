@@ -18,7 +18,7 @@ const category_1 = __importDefault(require("../../../Category/infrastructure/mod
 class MongoRepository {
     getAllNews() {
         return __awaiter(this, void 0, void 0, function* () {
-            const news = yield news_1.default.find();
+            const news = yield news_1.default.find().populate({ path: 'category' });
             return news;
         });
     }

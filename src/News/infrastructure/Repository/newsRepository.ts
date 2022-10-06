@@ -6,7 +6,7 @@ import { Schema } from 'mongoose';
 
 export class MongoRepository implements INewsRepository {
     async getAllNews(): Promise<INews [] | null>  {
-        const news = await News.find();
+        const news = await News.find().populate({path : 'category'});
         return news;
     }
     async getNewsById(id: string): Promise<INews | null> {

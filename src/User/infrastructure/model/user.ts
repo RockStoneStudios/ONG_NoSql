@@ -1,4 +1,4 @@
-import {model,Schema} from 'mongoose';
+import {model,Schema,Types} from 'mongoose';
 import { IUser } from '../../domain/userEntity';
 
 const Userchema = new Schema <IUser> ({
@@ -29,8 +29,8 @@ const Userchema = new Schema <IUser> ({
         required : false
      },
      role: {
-         type : Schema.Types.ObjectId,
-         ref : 'Role'
+         type : Types.ObjectId,
+         ref : 'Rol'
      },
      is_deleted : {
         type : Boolean,

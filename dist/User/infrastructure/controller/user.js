@@ -18,7 +18,6 @@ class UserController {
         this.userCase = userCase;
         this.getAllUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log('hello');
                 const users = yield this.userCase.getAllUser();
                 console.log(users);
                 return res.status(200).json(users);

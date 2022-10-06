@@ -18,7 +18,7 @@ const role_1 = __importDefault(require("../../../Role/infrastructure/model/role"
 class MongoRepository {
     getAllUser() {
         return __awaiter(this, void 0, void 0, function* () {
-            const users = yield user_1.default.find().populate('roles').orFail();
+            const users = yield user_1.default.find({}).populate({ path: 'role' });
             console.log(users);
             return users;
         });
