@@ -11,7 +11,7 @@ export class MongoRepository implements INewsRepository {
     }
     async getNewsById(id: string): Promise<INews | null> {
         const news = await News.findById(id);
-        return news;
+        return news
     }
     async createNews(news: INews): Promise<INews | null> {
         const newNews = new News(news);
